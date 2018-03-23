@@ -1,0 +1,9 @@
+parameters:
+
+
+database:
+	dsn: 'mysql:host=127.0.0.1;dbname=fotbalhristecz1'
+	user: fotbalhriste.cz
+	password: h6pd755X
+	options:
+		lazy: yes

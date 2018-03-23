@@ -1,0 +1,24 @@
+{block content}
+<div class="homepage-content content-background main-class">
+    <h2 class="text-center">AKTUALITY</h2>
+    <hr>
+    {foreach $articles as $article}
+        <article>
+            <div class="row border-2 click-div">
+                <div class="col-md-4">
+                    <img src="{$basePath}/{$article->url}">
+                </div>
+                <div class="col-md-8">
+                    <div class="title">{$article->name}</div>
+                    <div class="article-content">{$article->short_content}</div>
+                    <div class="link"><a n:href="Article:default $article->id_article">číst dál<i class="fa fa-arrow-circle-o-right"></i></a></div>
+                    <div class="float-right">Zobrazeno: {$article->show}x</div>
+                </div>
+            </div>
+        </article>
+    {/foreach}
+    <div class="paginator text-center">
+        {control visualPaginator}
+    </div>
+</div>
+

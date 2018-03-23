@@ -1,0 +1,36 @@
+{block footer}
+<footer>
+    <div class="container">
+        <div class="row text-center">
+            <div class="col-md-4">
+                <ul class="">
+                    <li><a n:href="Homepage:default"><span></span>Domu</a></li>
+                    <li><a n:href="Homepage:conditionals"><span></span>Obchodní podmínky</a></li>
+                    <li><a n:href="Homepage:about"><span></span>O nás</a></li>
+                    <li><a n:href="Homepage:contact"><span></span>Máš dotaz? Napiš nám!</a></li>
+                </ul>
+            </div>
+            <div class="col-md-4">
+                <a href=""></a>
+            </div>
+            <div class="col-md-4">
+                <h3>Přihlásit se k odběru novinek</h3>
+                {form newsletterForm}
+                    <div class="col-md-9 margin-top-1">
+                        <div class="input-group">
+                            {input email class => 'form-control', placeholder => 'Email'}
+                        </div>
+                    </div>
+                    <div class="col-md-3 margin-top-1">
+                        <div class="input-group">
+                            {input send class => 'btn btn-primary'}
+                        </div>
+                    </div>
+                {/form}
+            </div>
+        </div>
+    </div>
+    <div class="copy">
+        <i class="fa fa-copyright"></i> Copyright | All rights reserved | Design and powered by Filip Brezina
+    </div>
+</footer>

@@ -1,0 +1,47 @@
+<div class="text-center">
+    <h2>Přidejte obrázky</h2>
+</div>
+<div>
+    <label for="image-instruction">Postup přidávání obrázků:</label>
+    <ol id="image-instruction">
+        <li>Obrázky vybírejte <strong>jednotlivě</strong></li>
+        <li>První vyberte <strong>hlavní obrázek</strong> (hlavní obrázek Vás prezentuje při výpisu všech hřišť)</li>
+        <li>Další obrázky vybírejte v následujícím pořadí - <strong>tribuna, šatny, druhé hřiště, občerstvení</strong></li>
+    </ol>
+</div>
+{form uploadImage}
+    {input image}
+
+    <div>{dump $pitch}
+        <h3>Nahrané obrázky</h3>
+        <table class="table table-bordered">
+            <thead> 
+                <tr>
+                    <th>Náhled</th>
+                    <th>Pořadí</th>
+                    <th>Název</th>
+                    <th>Popis</th>
+                    <th>Nástroje</th>
+                </tr>
+            </thead>
+            <tbody>
+                {foreach $pitch->getAllImages() as $image}
+                    <tr>
+                        <td><div class="col-md-3"><img src="{$basePath}/{$image->url}" style="width: 100%;"></div></td>
+                        <td>{$image->number}</td>
+                        <td>{$image->name}</td>
+                        <td>{*$image*}</td>
+                        <td><a class="i-padding ajax" title="Změnit"><i class="fa fa-pencil a-link"></i></a><a n:href="deleteImage! $image->id_image" class="i-padding ajax" title="Vymazat"><i class="fa fa-trash a-link"></i></a></td>
+                    </tr>
+                {/foreach}
+            </tbody>
+        </table>
+    </div>
+    <div class="clearfix"></div>
+    <div class="col-md-2 float-right">
+        {input send class => 'btn btn-primary ajax'}
+    </div>
+{/form}
+<div class="clearfix"></div>
+<hr>
+

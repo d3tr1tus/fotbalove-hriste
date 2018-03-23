@@ -1,0 +1,19 @@
+{block content}
+<div class="container content-background main-class">
+    <h2 class="text-center">Soutež správců</h2>
+    <hr>
+    <div class="width-40 center-block">
+        <p>
+            Seznam aktuálně přihlášených správců do soutěže:<br>
+            <strong>(Hlasování bude možné, až od 24.3.2018!)</strong>
+        </p>
+        {foreach $pitch->getResultCompetition() as $admin}
+            <h5>{if $httpSession == NULL && 2 < 1}<a href="{plink voting! $admin->get('id_pitch')}">{/if}{$admin->get('admin')}{if $httpSession == NULL}</a>{/if}</h5>
+            <div class="progress">
+                <div class="progress-bar" role="progressbar" aria-valuenow="{$pitch->getPercentageVote($admin->get('vote'))}" aria-valuemin="0" aria-valuemax="100" style="width:{$pitch->getPercentageVote($admin->get('vote'))}%">
+                    {$pitch->getPercentageVote($admin->get('vote'))}%
+                </div>
+            </div>
+        {/foreach}
+    </div>
+</div>

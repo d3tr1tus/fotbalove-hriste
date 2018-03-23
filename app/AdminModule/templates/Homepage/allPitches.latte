@@ -1,0 +1,25 @@
+{block content}
+<table id="table-all-pitch" class="table table-striped">
+    <thead>
+        <tr>
+            <th>Obrázek</th>
+            <th>Název</th>
+            <th>Popis</th>
+            <th>Správce</th>
+            <th>Vytvořeno</th>
+            <th>Nástroje</th>
+        </tr>
+    </thead>
+    <tbody>
+        {foreach $pitch->getAllPitches() as $p}
+            <tr>
+                <td><img src="{$basePath}/{$p->get('thumb')}"></td>
+                <td>{$p->get('name')}</td>
+                <td>{$p->get('info')}</td>
+                <td>{$p->get('admin')}</td>
+                <td>{$p->get('created')|date: 'd.m. Y'}, {$p->get('created')|date: 'H:i'}</td>
+                <td><a n:href="deletePitch! $p->get('id_pitch')" title="Smazat hřiště"><i class="fa fa-trash"></i></a>{if $p->get('user_id') == 1}<a n:href="editPitch! $p->get('id_pitch')" title="Upravit hřiště"><i class="fa fa-pencil"></i></a>{/if}</td>
+            </tr>
+        {/foreach}
+    </tbody>
+</table>

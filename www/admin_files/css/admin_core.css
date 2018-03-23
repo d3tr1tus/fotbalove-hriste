@@ -1,0 +1,68 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 12.7.2017, 18:13:57
+    Author     : Filip Březina
+*/
+.py-3 table i {
+  font-size: 2em;
+  margin-left: 0.5em;
+}
+.py-3 .panel-primary .btn-group {
+  margin-left: 1em;
+}
+.py-3 .panel-primary .panel-heading {
+  margin-bottom: 1em;
+}
+/* ALERTS */
+.alert-info {
+  font-size: 1.5em;
+  position: fixed;
+  width: 100%;
+}
+.alert-info a i {
+  font-size: 1.5em;
+}
+.alert-success {
+  font-size: 1.5em;
+  position: fixed;
+  width: 100%;
+}
+.alert-success a i {
+  font-size: 1.5em;
+}
+.alert-danger {
+  font-size: 1.5em;
+  position: fixed;
+  width: 100%;
+}
+.alert-danger a i {
+  font-size: 1.5em;
+}
+.alert-warning {
+  font-size: 1.5em;
+  position: fixed;
+  width: 100%;
+}
+.alert-warning a i {
+  font-size: 1.5em;
+}
+.add-article .col-md-12 {
+  margin-top: 1em;
+}
+.add-article .col-md-12:first-child {
+  margin-top: 0px;
+}
+.add-article .col-md-12:nth-child(4) {
+  margin-bottom: 1em;
+}
+.flash {
+  z-index: 10;
+}
+.zet-fileupload-table td.preview img {
+  width: 90px;
+}
+/*# sourceMappingURL=admin_core.css.map */

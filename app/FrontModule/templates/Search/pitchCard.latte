@@ -1,0 +1,131 @@
+{block content}
+<div class="content-background field-card">
+    <div class="col-md-12"><a n:href="default $query" class="a-link"><i class="fa fa-arrow-left"></i> zpět na výsledky hledání</a></div>
+    <div class="block-image">
+        <div class="col-md-4">
+            <a href="{$basePath}/{if $pitch->getMainImage()}{$pitch->getMainImage()}{else}images/800_football-ball.jpg{/if}" data-toggle="lightbox" data-gallery="field-card-gallery">
+                <img class="img-thumbnail" alt="" src="{$basePath}/{if $pitch->getMainImage()}{$pitch->getMainImage()}{else}images/800_football-ball.jpg{/if}" class="img-fluid">
+            </a>
+        </div>
+        <div class="col-md-8">
+            {foreach $pitch->getImages() as $image}
+                <div class="col-md-2">
+                    <a href="{$basePath}/{$image->url}" data-toggle="lightbox" data-gallery="field-card-gallery">
+                        <img class="img-thumbnail" alt="" src="{$basePath}/{$image->url}" class="img-fluid">
+                    </a>
+                </div>
+            {/foreach}
+        </div>
+    </div>
+    <div class="clearfix"></div>
+    <div class="field-card-content panel-group">
+        <div class="col-md-4">
+            <div class="field-card-item panel panel-primary">
+                <div class="panel-heading">Název klubu:</div>
+                <div class="panel-body">{$pitch->get('name')}</div>   
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="field-card-item panel panel-primary">
+                <div class="panel-heading">Adresa:</div>
+                <div class="panel-body">{$pitch->get('adress')}</div>   
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="field-card-item panel panel-primary">
+                <div class="panel-heading">Správce:</div>
+                <div class="panel-body">{$pitch->get('admin')}</div>   
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="field-card-item panel panel-primary">
+                <div class="panel-heading">Kontakt na klub:</div>
+                <div class="panel-body">{$pitch->get('contact_club')}</div>   
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="field-card-item panel panel-primary">
+                <div class="panel-heading">Kontaktní osoba:</div>
+                <div class="panel-body">{$pitch->get('name_contact')}</div>   
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="field-card-item panel panel-primary">
+                <div class="panel-heading">Telefon:</div>
+                <div class="panel-body">{$pitch->get('tel')}</div>   
+            </div>
+        </div>
+        <div class="clearfix"></div>
+        <div class="col-md-12">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Číslo</th>
+                        <th>Mužstvo</th>
+                        <th>Kategorie</th>
+                        <th>Soutěž</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {foreach $pitch->getTeams() as $team}
+                        <tr>
+                            <td>{$iterator->counter}.</td>
+                            <td>{$team->name}</td>
+                            <td>{$team->category}</td>
+                            <td>{$team->competition}</td>
+                        </tr>
+                    {/foreach}
+                </tbody>
+            </table>
+        </div>
+        <div class="clearfix"></div>
+        <div class="col-md-12">
+            <table class="table we-have">
+                <thead>
+                    <tr>
+                        <th>U nás máme</th>
+                        <th>Ano</th>
+                        <th>Ne</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {foreach $pitch->getWeHave() as $weHave}
+                        <tr>
+                            <td>{$weHave->value}</td>
+                            <td><span class="content-check"><i class="fa fa-times {if !$weHave->exist}unactive-check{/if}" aria-hidden="true"></i></span></td>
+                            <td><span class="content-check"><i class="fa fa-times {if $weHave->exist}unactive-check{/if}" aria-hidden="true"></i></span></td>
+                        </tr>
+                    {/foreach}
+                </tbody>
+            </table>
+        </div>
+        <div><div id="map" style="width: 100%; height: 500px;"></div></div>
+        <div class="clearfix"></div>
+    </div>
+</div>
+{/block}
+{block scripts}
+<script type="text/javascript">
+    $(document).on('click', '[data-toggle="lightbox"]', function (event) {
+        event.preventDefault();
+        $(this).ekkoLightbox();
+    });
+
+    function initMap() {
+        var myLatLng = { lat: {floatval($pitch->getCoordinates()->lat)}, lng: {floatval($pitch->getCoordinates()->long)}};
+
+        // Create a map object and specify the DOM element for display.
+        var map = new google.maps.Map(document.getElementById('map'), {
+            center: myLatLng,
+            zoom: 17
+        });
+
+        // Create a marker and set its position.
+        var marker = new google.maps.Marker({
+            map: map,
+            position: myLatLng,
+            title: {$pitch->get('name')}
+        });
+    }
+</script>
+{/block}

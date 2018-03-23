@@ -1,0 +1,242 @@
+{if $user->isInRole(Constants::ROLE_ADMIN) || $soon == 'petrkostka1692017' || $countDownEnd}
+    {**
+     * @param string   $basePath web base path
+     * @param array    $flashes  flash messages
+    *}
+    <!DOCTYPE html>
+    <html>
+        <head>
+            <meta charset="utf-8">
+            <title>{ifset title}{include title|stripHtml} | {/ifset}Fotbalové hřiště</title>
+            <link rel="stylesheet" href="{$basePath}/css/main.css">
+            <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
+            <!-- Stylesheets -->
+            <link rel="stylesheet" href="{$basePath}/front/vendor/flickity/flickity.min.css" />
+            <link rel="stylesheet" href="{$basePath}/front/vendor/bootstrap/css/bootstrap.min.css" />
+            <link rel="stylesheet" href="{$basePath}/front/vendor/font-awesome/css/font-awesome.min.css" />
+            <link rel="stylesheet" href="{$basePath}/plugins/lightbox/dist/ekko-lightbox.css" />
+            {\Zet\FileUpload\FileUploadControl::getHead($basePath)}
+            <link href="https://fonts.googleapis.com/css?family=Arimo|Josefin+Sans" rel="stylesheet">
+            <link href="{$basePath}/plugins/x-editable/dist/bootstrap3-editable/css/bootstrap-editable.css" rel="stylesheet"/>
+            <link href='{$basePath}/images/favicon-green.png' rel='shortcut icon' type='image/png'>
+            <!-- End Stylesheets -->
+
+            {block head}{/block}
+        </head>
+        <body>
+            <div id="loading" class="overlay-spinner" style="display: none;"><div class="loader"></div></div>
+                {foreach $flashes as $flash}
+                <div class="flash alert alert-{$flash->type} alert-dismissable fade in">
+                    <a href="#" class="close" data-dismiss="alert" aria-label="close"><i class="fa fa-times"></i></a>
+                    <center>
+                        <i class="fa fa-{if $flash->type == 'info'}info-circle{elseif $flash->type == 'danger'}exclamation-circle{elseif $flash->type == 'warning'}question-circle{elseif $flash->type == 'success'}check-circle{/if}"></i>
+                        {$flash->message}
+                    </center>
+                </div>
+            {/foreach}
+            <div class="background">
+                <div class="overlay"></div>
+                <div class="container container-home">
+                    <header>
+                        <div id="top-bar" class="top-bar">
+                            <div class="top-bar-right">
+                                <div class="top-bar-social">
+                                    <div class="bar-item"><a href="https://www.facebook.com/Fotbalhristecz-1936615299896551/" target="_blank"><i class="fa fa-facebook"></i></a></div>
+                                    <div class="bar-item"><a href="https://www.instagram.com/fotbalhristecz/" target="_blank"><i class="fa fa-instagram"></i></a></div>
+                                    <div class="bar-item"><a href=""><i class="fa fa-youtube"></i></a></div>
+                                </div>
+                                {if $user->isLoggedIn()}<div class="bar-item bar-item-right"><a n:href="Sign:out">Odhlásit se</a></div>{/if}
+                                <div style="display: none;">
+                                    <div class="bar-item bar-item-right"><a href="#">EN</a></div>
+                                    <div class="bar-item bar-item-right">|</div>
+                                    <div class="bar-item bar-item-right"><a href="#">SK</a></div>
+                                    <div class="bar-item bar-item-right">|</div>
+                                    <div class="bar-item bar-item-right"><a href="#">CS</a></div>
+                                </div>
+                            </div>
+                            <div class="top-bar-left">
+                                <div class="bar-item logo"><a n:href="Homepage:"><img src="{$basePath}/images/logo-lajna.png" style="width: 100%;"></a></div>
+                            </div>
+
+                        </div>
+                        <nav class="navbar navbar-default">
+                            <div class="container-fluid">
+                                <div class="navbar-header">
+                                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#main-navbar">
+                                        <span class="icon-bar"></span>
+                                        <span class="icon-bar"></span>
+                                        <span class="icon-bar"></span>                        
+                                    </button>
+                                </div>
+                                <div class="collapse navbar-collapse" id="main-navbar">
+                                    <ul class="nav navbar-nav">
+                                        <li class="{ifCurrent Homepage:}activ{/ifCurrent}" title="Domů"><a n:href="Homepage:"><i class="fa fa-home" aria-hidden="true"></i>Domů</a></li>
+                                        <li class="{ifCurrent Homepage:meintenanceField}activ{/ifCurrent}" title="Údržba hřišť"><a n:href="Homepage:meintenanceField"><i class="fa fa-spoon" aria-hidden="true"></i>Údržba hřišť</a></li>
+                                        <li class="{ifCurrent Homepage:travel}activ{/ifCurrent}" title="Cesty za fotbalem"><a n:href="Homepage:travel"><i class="fa fa-map" aria-hidden="true"></i>Cesty za fotbalem</a></li>
+                                        <li class="{ifCurrent Homepage:lostField}activ{/ifCurrent}" title="Ztracené hřiště"><a n:href="Homepage:lostField"><i class="fa fa-remove" aria-hidden="true"></i>Ztracená hřiště</a></li>
+                                        <li class="{ifCurrent Homepage:matches}activ{/ifCurrent}" title="Tipy pro trenéry"><a n:href="Homepage:matches"><i class="fa fa-pencil-square-o" aria-hidden="true"></i>Tipy pro trenéry</a></li>
+                                        <li class="{ifCurrent Homepage:footballGlos}activ{/ifCurrent}" title="Fotbalový glosář"><a n:href="Homepage:footballGlos"><i class="fa fa-futbol-o" aria-hidden="true"></i>Fotbalový glosář</a></li>
+                                        <li style="display: none;" class="{ifCurrent Homepage:cooperation}activ{/ifCurrent}" title="Spolupráce"><a n:href="Homepage:cooperation"><i class="fa fa-compress" aria-hidden="true"></i>Spolupráce </a></li>
+                                    </ul>
+                                    <ul class="nav navbar-nav navbar-right">
+                                        <li class="{ifCurrent AddPitch:}activ{/ifCurrent}" title="Přidat nové hřiště" style="background-color: #060;">{if $user->isLoggedIn()}{if $user->isInRole(Constants::ROLE_ADMIN)}<a n:href=":Admin:Homepage:default">{else}<a n:href="AddPitch:default">{/if}<i class="fa fa-user" aria-hidden="true"></i>Můj účet</a>{else}<a n:href="AddPitch:default"><i class="fa fa-plus-square" aria-hidden="true"></i>Přidat hřiště</a>{/if}</li>
+                                        <img src="{$basePath}/images/arrow-add-pitch-tah.png" class="arrow-add-pitch">
+                                    </ul>
+                                </div>
+                            </div>
+                        </nav>
+                    </header>
+                    {ifCurrent Homepage:}
+                        <div class="video">
+                            <h2 class="text-center" style="color: #FFF;">Video návod</h2>
+                            <div class="row">
+                                <video autoplay controls>
+                                    <source src="{$basePath}/images/uvodni.mp4" type="video/mp4">
+                                    Váš prohlížeč nepodporuje tento formát
+                                </video>
+                            </div>
+                        </div>
+                        {include '../../components/find.latte'}
+                    {/ifCurrent}
+
+                    {include content}
+                </div>
+
+                {include 'Homepage/component/footer.latte'}
+
+            </div>
+
+            <script src="{$basePath}/js/jquery.min.js"></script>
+            <script src="{$basePath}/js/nette.ajax.min.js"></script>
+            <script src="{$basePath}/js/jquery.ajaxform.js"></script>
+            <script src="{$basePath}/front/vendor/bootstrap/js/bootstrap.min.js"></script>
+            <script src="{$basePath}/front/vendor/bootstrap-hover-dropdown/bootstrap-hover-dropdown.min.js"></script>
+            <script src="{$basePath}/front/vendor/flickity/flickity.pkgd.min.js"></script>
+            <script src="{$basePath}/front/vendor/inview/jquery.inview.min.js"></script>
+            <script src="{$basePath}/front/vendor/masonry/masonry.pkgd.min.js"></script>
+            <script src="{$basePath}/front/vendor/velocity/velocity.min.js"></script>
+            <script src="{$basePath}/front/vendor/velocity/velocity.ui.min.js"></script>
+            <script src="{$basePath}/front/vendor/waypoints/jquery.waypoints.min.js"></script>
+            <script src="{$basePath}/front/main.js"></script>
+            <script src="{$basePath}/js/netteForms.js"></script>
+            <script src="{$basePath}/plugins/lightbox/dist/ekko-lightbox.js"></script>
+            <script type="text/javascript" src="{$basePath}/plugins/maphilight/jquery.maphilight.min.js"></script>
+            {\Zet\FileUpload\FileUploadControl::getScripts($basePath)}
+            <script src="{$basePath}/plugins/x-editable/dist/bootstrap3-editable/js/bootstrap-editable.min.js"></script>
+            <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAo_33M6CJmGYrrnpOzetZNPwqZBbaNUag&callback=initMap"
+            async defer></script>
+            <!-- Global site tag (gtag.js) - Google Analytics -->
+            <script async src="https://www.googletagmanager.com/gtag/js?id=UA-109871070-1"></script>
+            <script>
+                window.dataLayer = window.dataLayer || [];
+                function gtag() {
+                    dataLayer.push(arguments);
+                }
+                gtag('js', new Date());
+
+                gtag('config', 'UA-109871070-1');
+            </script>
+
+            <script type="text/javascript">
+                $('.map').maphilight();
+            </script>
+
+            {block scripts}
+            {/block}
+        </body>
+    </html>
+
+{else}
+
+    <!DOCTYPE html>
+    <html lang="cs">
+        <head>
+
+            <!-- SITE TITTLE -->
+            <meta charset="utf-8">
+            <meta http-equiv="X-UA-Compatible" content="IE=edge">
+            <meta name="viewport" content="width=device-width, initial-scale=1">
+            <title>{ifset title}{include title|stripHtml} | {/ifset}Fotbalové hřiště</title>
+
+            <!-- PLUGINS CSS STYLE -->
+            <link href="{$basePath}/coming_soon/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+            <link href="{$basePath}/coming_soon/plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+            <link rel="stylesheet" type="text/css" href="{$basePath}/coming_soon/plugins/rs-plugin/css/settings.css" media="screen">
+            <link rel="stylesheet" type="text/css" href="{$basePath}/coming_soon/plugins/owl-carousel/owl.carousel.css" media="screen">
+
+            <!-- GOOGLE FONT -->
+            <link href='https://fonts.googleapis.com/css?family=Oxygen:400,300,700' rel='stylesheet' type='text/css'>
+
+            <!-- CUSTOM CSS -->
+            <link href="{$basePath}/coming_soon/css/style.css" rel="stylesheet">
+            <link rel="stylesheet" href="{$basePath}/coming_soon/css/default.css" id="option_color">
+
+            <!-- Icons -->
+            <link rel="shortcut icon" href="{$basePath}/images/favicon-green.png">
+
+            <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+            <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+            <!--[if lt IE 9]>
+            <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+            <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+            <![endif]-->
+
+        </head>
+        <body class="commingSoon">
+            <!-- BLACK SECTION -->
+            <section class="blackSection clearfix">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-6 col-md-offset-3 col-sm-10 col-sm-offset-1 col-xs-12">
+                            <a n:href="Homepage:default" class="pageLogo"><img src="{$basePath}/images/logo-lajna.png" alt="logo" width="100%"></a>
+                            <h1>Již brzy!
+                                <small>Momentálně pracujeme na novém vzhledu webových stránek. Prosím buďte trpěliví!</small>
+                            </h1>
+                            <div class="count-down clearfix">
+                                <div id="simple_timer"></div>
+                            </div>
+                            {form soonForm}
+                                <div class="input-group">
+                                    {input soon_pass class => 'form-control', aria-describedby => basic-addon2, placeholder => 'Zadejte heslo'}
+                                    <div class="input-group-btn">
+                                        <button class="input-group-addon" id="basic-addon2"> 
+                                            <i class="fa fa-search" aria-hidden="true">{input send}</i>
+                                        </button>
+                                    </div> 
+                                </div>
+                            {/form}
+                            <ul class="list-inline">
+                                <li><a href="https://www.facebook.com/Fotbalhristecz-1936615299896551/" target="_blank"><i class="fa fa-facebook"></i></a></li>
+                                <li><a href="https://www.instagram.com/fotbalhristecz/" target="_blank"><i class="fa fa-instagram"></i></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+            <script src="{$basePath}/coming_soon/plugins/jquery-ui/jquery-ui.js"></script>
+            <script src="{$basePath}/coming_soon/plugins/bootstrap/js/bootstrap.min.js"></script>
+            <script src="{$basePath}/coming_soon/plugins/countdown/jquery.syotimer.js"></script>
+            <script type="text/javascript">
+                jQuery(document).ready(function () {
+                    $('#simple_timer').syotimer({
+                        year: 2017,
+                        month: 11,
+                        day: 20,
+                        hour: 12,
+                        minute: 00,
+                        lang: 'cze',
+                        effectType: 'opacity',
+                        afterDeadline: function (timerBlock) {
+                            timerBlock.bodyBlock.html('<p id="countdown-end" style="font-size: 1.2em; color: #fff;">Odpočítávání skončilo!</p>');
+                            window.location.replace({link refresh!});
+                        }
+                    });
+                });
+            </script>
+
+        </body>
+    </html>
+
+{/if}

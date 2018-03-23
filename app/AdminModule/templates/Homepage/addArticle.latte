@@ -1,0 +1,58 @@
+{block content}
+<div class="add-article-content">
+    {form addArticle}
+        <div class="row add-article">
+            <div class="col-md-12">
+                <div class="input-group">
+                    <span class="input-group-addon">Název článku</span>
+                    {input name class => 'form-control'}
+                </div>
+            </div>
+            <div class="col-md-12">
+                <div class="input-group">
+                    <span class="input-group-addon">Obsah</span>
+                    {input content id => 'content', class => 'form-control'}
+                </div>
+            </div>
+            <div class="col-md-12">
+                <div class="input-group">
+                    <span class="input-group-addon">Krátký popis</span>
+                    {input short_content class => 'form-control'}
+                </div>
+            </div>
+            <div class="col-md-12">
+                <div class="input-group">
+                    <span class="input-group-addon">Vyberte kategorii</span>
+                    {input category class => 'form-control'}
+                </div>
+            </div>
+            {input image class => 'col-md-12'}
+            <div n:if="isset($imagesArticle)" class="col-md-12 clearfix">
+                <h2>Nahrané obrázky</h2>
+                <table id="table-all-pitch" class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>Náhled</th>
+                            <th>Název</th>
+                            <th>Url</th>
+                            <th>Vytvořeno</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {foreach $imagesArticle as $image}
+                            <tr>
+                                <td><img src="{$basePath}/{$image->thumb}"></td>
+                                <td>{$image->name}</td>
+                                <td>{$basePath}/{$image->url}</td>
+                                <td>{$image->created|date: 'd.m. Y'}, {$image->created|date: 'H:i'}</td>
+                            </tr>
+                        {/foreach}
+                    </tbody>
+                </table>
+            </div>
+            <div class="col-md-12">
+                {input send class => 'btn btn-primary'}
+            </div>
+        </div>
+    {/form}
+</div>

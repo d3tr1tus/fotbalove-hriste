@@ -1,0 +1,38 @@
+{block content}
+<div class="container content-background sign-up">
+    <center>
+        <h1 n:block=title>Zaregistrujte se</h1>
+    </center>
+    {form signUpForm class => 'width-30 margin-center'}
+        <ul class="form-errors no-padding" n:if="$form->hasErrors()">
+            <li n:foreach="$form->errors as $error">{$error}</li>
+        </ul>
+        <div class="input-group">
+            <span class="input-group-addon"><i class="fa fa-user" aria-hidden="true"></i></span>
+                {input first_name class => 'form-control', placeholder => 'Jméno'}
+        </div>
+        <div class="input-group margin-top-1">
+            <span class="input-group-addon"><i class="fa fa-user" aria-hidden="true"></i></span>
+                {input last_name class => 'form-control', placeholder => 'Příjmení'}
+        </div>
+        <div class="input-group margin-top-1">
+            <span class="input-group-addon"><i class="fa fa-envelope" aria-hidden="true"></i></span>
+                {input email class => 'form-control', placeholder => 'Email'}
+        </div>
+        <div class="input-group margin-top-1">
+            <span class="input-group-addon"><i class="fa fa-phone" aria-hidden="true"></i></span>
+                {input tel class => 'form-control', placeholder => 'Telefon'}
+        </div>
+        <div class="input-group margin-top-1">
+            <span class="input-group-addon"><i class="fa fa-lock" aria-hidden="true"></i></span>
+                {input password class => 'form-control', placeholder => 'Heslo'}
+        </div>
+        <div class="input-group margin-top-1">
+            <span class="input-group-addon"><i class="fa fa-lock" aria-hidden="true"></i></span>
+                {input password_valid class => 'form-control', placeholder => 'Heslo znovu'}
+        </div>
+        {input send class => 'btn btn-default margin-top-1'}
+
+        <p class="margin-top-1"><a n:href="in">Již u nás máte účet? Přihlaste se.</a></p>
+    {/form}
+</div>

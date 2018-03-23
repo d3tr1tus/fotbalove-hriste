@@ -1,0 +1,84 @@
+<div class="main-finder">
+    <div class="row">
+        <div class="col-md-6 home-find-1">
+            <div class="finder main-finder-col-1 text-center"><h2>Najdi si své hřiště...</h2></div>
+            <div class="finder main-finder-col-2">
+                <div class="text-center">
+                    {form searchForm}
+                        <div class="input-group">
+                            {input text class => 'form-control', placeholder => 'Hledat..'}
+                            <div class="input-group-btn">
+                                <button class="btn btn-default"> 
+                                    <i class="fa fa-search" aria-hidden="true">{input find}</i>
+                                </button>
+                            </div> 
+                        </div>
+                    {/form}
+                </div>
+                <div style="padding-top: 10px;"><a href="{plink Search:default}" class="a-link">Vypsat všechna hřiště...</a></div>
+            </div>
+            <div>
+                <div class="col-md-9">
+                    <h2 style="text-decoration: underline">Naposledy přidaná hřiště:</h2>
+                    {foreach $presenter->getLastThreeTeams() as $team}
+                        <div><h3><a href="{plink Search:pitchCard pitch_card_id => $team->get('id_pitch')}" class="a-link">{$team->get('name')}</a></h3></div>
+                            {/foreach}
+                </div>
+                <a href="{plink Competition:default}">
+                    <div class="col-md-3 text-center" style="font-size: 2em; padding: 0.2em; border: 2px solid red; color: red;">
+                        <span>Hlasujte v soutěži správců!</span>
+                    </div>
+                </a>
+            </div>
+        </div>
+        <div class="col-md-6 home-find-2">
+            <div class="main-finder-col-4 text-center">
+                <h2>Vyberte oblast...</h2>
+            </div>
+            <div class="main-finder-col-3 text-center">
+                <div class="map-small">
+                    <img id="Image-Maps-Com-image-maps-2017-11-24-085041" class="map" src="{$basePath}/images/mapa-mala.png" border="0" width="260" height="150" orgWidth="260" orgHeight="150" usemap="#image-maps-2017-11-24-085041" alt=""/>
+                    <map name="image-maps-2017-11-24-085041" id="ImageMapsCom-image-maps-2017-11-24-085041">
+                        <area  alt="Hlavní město Praha" title="{Constants::$regions[1]} ({$presenter->countTeamsInRegion(1)})" href="{plink filterByRegion! region => Constants::$regions[1]}" shape="poly" coords="82,58,91,54,100,58,97,63,94,63,86,67" style="outline:none;" target="_self"     />
+                        <area shape="rect" coords="258,148,260,150" alt="Image Map" style="outline:none;" title="Image Map" href="http://www.image-maps.com/index.php?aff=mapped_users_87444" />
+                        <area  alt="Karlovarský kraj" title="{Constants::$regions[5]}" href="{plink filterByRegion! region => Constants::$regions[5]}" shape="poly" coords="2,42,8,52,16,39,33,38,44,44,46,58,43,62,38,62,34,66,16,68,4,56,0,46" style="outline:none;" target="_self"     />
+                        <area  alt="Ústecký kraj" title="{Constants::$regions[6]} ({$presenter->countTeamsInRegion(6)})" shape="poly" coords="43,44,33,38,57,22,88,9,83,4,85,1,93,2,97,14,90,16,87,23,91,34,86,43,73,43,55,52,51,58,45,58" style="outline:none;" target="_self"     />
+                        <area  alt="Liberecký kraj" title="{Constants::$regions[7]} ({$presenter->countTeamsInRegion(7)})" shape="poly" coords="97,12,110,13,111,4,122,6,125,15,132,17,133,32,124,35,117,33,107,28,97,35,90,34,87,25,88,18" style="outline:none;" target="_self"     />
+                        <area  alt="Středočeský kraj" title="{Constants::$regions[2]} ({$presenter->countTeamsInRegion(2)})" href="{plink filterByRegion! region => Constants::$regions[2]}" shape="poly" coords="85,43,91,34,96,36,108,27,117,33,115,42,118,47,125,47,127,58,125,61,132,67,130,72,118,80,120,86,110,87,107,91,102,87,96,92,64,92,60,81,64,79,65,68,50,58,55,52,73,43" style="outline:none;" target="_self"     />
+                        <area  alt="Plzeňský kraj" title="{Constants::$regions[4]} ({$presenter->countTeamsInRegion(4)})" shape="poly" coords="17,67,31,66,38,62,43,63,46,58,51,60,65,67,65,79,59,82,63,92,63,103,60,113,55,114,53,123,33,102,26,102,10,76" style="outline:none;" target="_self"     />
+                        <area  alt="Jihočeský kraj" title="{Constants::$regions[3]} ({$presenter->countTeamsInRegion(3)})" shape="poly" coords="64,93,82,91,97,92,101,87,108,91,109,105,134,118,130,123,133,129,110,123,109,137,104,137,100,141,99,148,90,144,84,149,75,147,53,123,56,114,61,112,64,103" style="outline:none;" target="_self"     />
+                        <area  alt="Kraj Vysočina" title="{Constants::$regions[10]} ({$presenter->countTeamsInRegion(10)})" shape="poly" coords="120,86,118,80,130,73,147,82,149,80,164,88,164,101,160,105,159,116,155,121,147,119,134,128,132,128,130,122,134,117,108,106,108,91,110,87" style="outline:none;" target="_self"     />
+                        <area  alt="Pardubický kraj" title="{Constants::$regions[9]} ({$presenter->countTeamsInRegion(9)})" shape="poly" coords="124,62,127,58,148,54,156,62,169,54,175,57,181,52,177,63,182,80,178,88,176,85,164,88,150,79,146,83,130,73,131,68" style="outline:none;" target="_self"     />
+                        <area  alt="Královéhradecký kraj" title="{Constants::$regions[8]} ({$presenter->countTeamsInRegion(8)})" shape="poly" coords="132,17,149,26,160,24,165,29,157,37,170,53,157,61,148,54,127,57,125,46,119,47,116,43,116,33,124,35,133,32" style="outline:none;" target="_self"     />
+                        <area  alt="Olomoucký kraj" title="{Constants::$regions[12]} ({$presenter->countTeamsInRegion(12)})" shape="poly" coords="187,48,181,38,182,35,202,46,203,51,196,53,193,71,207,78,214,78,224,90,195,105,185,92,183,93,185,98,183,100,180,96,178,87,182,81,176,64,180,52,182,49" style="outline:none;" target="_self"     />
+                        <area  alt="Jihomoravský kraj" title="{Constants::$regions[11]} ({$presenter->countTeamsInRegion(11)})" shape="poly" coords="164,88,177,86,181,98,185,97,183,93,185,92,194,106,194,116,214,129,209,133,196,129,189,138,189,145,186,145,186,140,169,134,165,139,154,138,144,131,133,129,147,121,154,121,160,116,160,105,164,102" style="outline:none;" target="_self"     />
+                        <area  alt="Zlínský kraj" title="{Constants::$regions[14]} ({$presenter->countTeamsInRegion(14)})" shape="poly" coords="195,105,224,90,236,90,244,97,241,102,233,104,231,118,213,130,194,117" style="outline:none;" target="_self"     />
+                        <area  alt="Moravskoslezský kraj" title="{Constants::$regions[13]} ({$presenter->countTeamsInRegion(13)})" shape="poly" coords="202,46,213,43,217,49,211,53,222,64,228,57,249,67,250,77,257,80,259,88,249,89,244,98,238,91,223,90,213,78,207,77,193,70,196,54,202,51" style="outline:none;" target="_self"     />
+                    </map>
+                </div>
+
+                <div class="map-big">
+                    <img id="Image-Maps-Com-image-maps-2017-06-21-151041" src="{$basePath}/images/mapa.png" border="0" width="419" height="242" orgWidth="419" orgHeight="242" usemap="#image-maps-2017-06-21-151041" alt="" class="map" />
+                    <map name="image-maps-2017-06-21-151041" id="ImageMapsCom-image-maps-2017-06-21-151041">
+                        <area shape="rect" coords="417,240,419,242" alt="Image Map" style="outline:none;" title="Image Map" href="http://www.image-maps.com/index.php?aff=mapped_users_87444" />
+                        <area class="mapping" alt="" title="{Constants::$regions[5]}" href="{plink filterByRegion! region => Constants::$regions[5]}" shape="poly" coords="13,82,25,62,49,62,69,69,73,92,69,101,61,99,54,105,25,109,6,89,0,73,4,69" style="outline: none;" target="_self"     />
+                        <area  alt="" title="{Constants::$regions[6]} ({$presenter->countTeamsInRegion(6)})" href="{plink filterByRegion! region => Constants::$regions[6]}" shape="poly" coords="52,60,92,33,141,16,136,6,136,3,149,4,157,21,145,26,138,39,146,55,139,69,120,71,88,84,83,92,73,91,70,71" style="outline:none;" target="_self"    />
+                        <area  alt="" title="{Constants::$regions[4]} ({$presenter->countTeamsInRegion(4)})" href="{plink filterByRegion! region => Constants::$regions[4]}" shape="poly" coords="25,109,51,105,61,100,67,102,74,92,105,108,102,130,97,130,101,149,101,160,97,180,92,184,86,200,53,166,41,164,17,124" style="outline:none;" target="_self"     />
+                        <area  alt="" title="{Constants::$regions[1]} ({$presenter->countTeamsInRegion(1)})" href="{plink filterByRegion! region => Constants::$regions[1]}" shape="poly" coords="137,108,131,93,146,85,160,93,157,103,152,100" style="outline:none;" target="_self"     />
+                        <area  alt="" title="{Constants::$regions[2]} ({$presenter->countTeamsInRegion(2)})" href="{plink filterByRegion! region => Constants::$regions[2]}" shape="poly" coords="81,93,88,85,118,69,138,68,145,55,153,57,173,44,187,52,185,66,192,74,200,74,205,92,201,98,210,106,209,116,190,130,193,141,177,140,171,148,164,140,157,148,133,145,102,148,96,130,104,128,104,108" style="outline:none;" target="_self"     />
+                        <area  alt="" title="{Constants::$regions[7]} ({$presenter->countTeamsInRegion(7)})" href="{plink filterByRegion! region => Constants::$regions[7]}" shape="poly" coords="156,21,177,21,179,4,194,9,200,24,212,29,216,50,205,54,188,52,173,45,158,56,145,56,138,39,144,25" style="outline:none;" target="_self"     />
+                        <area  alt="" title="{Constants::$regions[3]} ({$presenter->countTeamsInRegion(3)})" href="{plink filterByRegion! region => Constants::$regions[3]}" shape="poly" coords="85,200,88,184,97,180,101,148,134,144,155,148,162,138,171,143,173,169,215,189,209,196,213,208,178,197,176,220,166,220,161,227,160,237,145,233,136,238,122,237" style="outline:none;" target="_self"     />
+                        <area  alt="" title="{Constants::$regions[8]} ({$presenter->countTeamsInRegion(8)})" href="{plink filterByRegion! region => Constants::$regions[8]}" shape="poly" coords="212,26,241,41,260,39,265,45,252,58,273,86,252,97,239,88,204,93,201,76,192,73,186,68,186,51,201,55,216,50" style="outline:none;" target="_self"     />
+                        <area  alt="" title="{Constants::$regions[9]} ({$presenter->countTeamsInRegion(9)})" href="{plink filterByRegion! region => Constants::$regions[9]}" shape="poly" coords="209,116,210,105,200,100,204,94,239,86,253,98,272,86,281,92,291,84,285,101,293,130,288,137,264,141,241,127,237,132" style="outline:none;" target="_self"     />
+                        <area  alt="" title="{Constants::$regions[10]} ({$presenter->countTeamsInRegion(10)})" href="{plink filterByRegion! region => Constants::$regions[10]}" shape="poly" coords="193,138,189,130,209,117,235,131,240,128,264,142,265,163,256,172,257,185,249,193,236,193,216,207,209,200,214,188,174,169,172,148,176,142" style="outline:none;" target="_self"     />
+                        <area  alt="" title="{Constants::$regions[11]} ({$presenter->countTeamsInRegion(11)})" href="{plink filterByRegion! region => Constants::$regions[11]}" shape="poly" coords="214,206,237,194,247,194,257,185,256,169,264,165,265,140,286,137,290,157,297,156,292,152,296,148,313,170,313,188,345,208,335,214,318,209,308,220,305,232,300,233,298,225,272,215,267,224,248,222,230,209" style="outline:none;" target="_self"     />
+                        <area  alt="" title="{Constants::$regions[12]} ({$presenter->countTeamsInRegion(12)})" href="{plink filterByRegion! region => Constants::$regions[12]}" shape="poly" coords="312,169,299,149,294,149,297,156,296,160,289,157,288,138,293,130,285,103,292,83,301,79,292,60,293,57,326,73,324,80,316,85,312,116,336,125,344,124,360,144" style="outline:none;" target="_self"     />
+                        <area  alt="" title="{Constants::$regions[14]} ({$presenter->countTeamsInRegion(14)})" href="{plink filterByRegion! region => Constants::$regions[14]}" shape="poly" coords="346,208,312,189,312,169,358,144,382,147,392,156,388,164,375,167,372,189" style="outline:none;" target="_self"     />
+                        <area  alt="" title="{Constants::$regions[13]} ({$presenter->countTeamsInRegion(13)})" href="{plink filterByRegion! region => Constants::$regions[13]}" shape="poly" coords="393,157,384,146,358,144,344,125,334,124,312,113,316,85,327,81,326,72,342,70,347,80,340,84,358,100,368,93,400,108,404,124,412,128,417,142,399,144" style="outline:none;" target="_self"     />
+                    </map>
+                </div>
+                <span id="name-region"><h3>Nevybrali jste žádný kraj.</h3></span>
+            </div>
+        </div>
+    </div>
+</div>

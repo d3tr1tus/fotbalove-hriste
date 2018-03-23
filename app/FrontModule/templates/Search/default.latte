@@ -1,0 +1,45 @@
+{block content}
+{include '../../../components/find.latte'}
+<div class="container content-background search">
+    {if !$search}
+        {if $region}
+            <div class="alert alert-danger">
+                <strong>POZOR!</strong> Nenašli jsme Vámi vybraný region "{$region}" zkuste něco jiného
+            </div>
+        {else}
+            <div class="alert alert-danger">
+                <strong>POZOR!</strong> Nenašli jsme Vámi zadaný výraz "{$query}" zkuste něco jiného
+            </div>
+        {/if}
+    {else}
+        {if $region}
+            <div class="alert alert-success">
+                Vámi vybraný region "{$region}" má {count($search)} {if count($search) == 1}výsledek{elseif count($search) > 4}výsledků{else}výsledky{/if}
+            </div>
+        {elseif $query}
+            <div class="alert alert-success">
+                Vámi zadaný výraz "{$query}" má {count($search)} {if count($search) == 1}výsledek{elseif count($search) > 4}výsledků{else}výsledky{/if}
+            </div>
+        {/if}
+    {/if}
+    {foreach $search as $pitch}
+        <article>
+            <div class="row border-2 click-div">
+                <div class="col-md-4">
+                    <img src="{$basePath}/{if $pitch->getMainImage()}{$pitch->getMainImage()}{else}images/800_football-ball.jpg{/if}">
+                </div>
+                <div class="col-md-8">
+                    <div>
+                        <div class="title float-left">{$pitch->get('name')}</div>
+                        {if $pitch->getCharacter()}
+                            <img src="{$basePath}/{$pitch->getCharacter()->thumb}" class="character">
+                        {/if}
+                    </div>
+                    <div class="clearfix"></div>
+                    <div class="article-content">{$pitch->get('info')}</div>
+                    <div class="link"><a n:href="pitchCard $query, $pitch->getID()">číst dál<i class="fa fa-arrow-circle-o-right"></i></a></div>
+                </div>
+            </div>
+        </article>
+    {/foreach}
+</div>

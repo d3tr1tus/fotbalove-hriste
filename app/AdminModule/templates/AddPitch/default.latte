@@ -1,0 +1,32 @@
+{block content}
+<div class="container content-background add-field"> 
+    {snippet addPitch}
+        {include 'components/pitch.latte'}
+        {if isset($page) && $page >= 1}
+            {snippet image}
+                {include 'components/image.latte'}
+            {/snippet}
+        {/if}
+        {if isset($page) &&  $page >= 2}
+            {snippet team}
+                {include 'components/team.latte'}
+            {/snippet}
+        {/if}
+        {if isset($page) &&  $page >= 3}
+            {snippet weHave}
+                {include 'components/weHave.latte'}
+            {/snippet}
+        {/if}
+        {if isset($page) &&  $page >= 4}
+            {include 'components/complete.latte'}
+        {/if}
+    {/snippet}
+</div>
+{/block}
+{block scripts}
+<script type="text/javascript">
+    $(document).on('change', '.checkboxWeHave', function () {
+        $.nette.ajax($(this).data('link'));
+    });
+</script>
+{/block}

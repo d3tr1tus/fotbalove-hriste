@@ -1,0 +1,57 @@
+<div class="text-center">
+    <h2>Přidejte týmy</h2>
+</div>
+<div>
+    <div class="col-md-12">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Číslo</th>
+                    <th>Mužstvo</th>
+                    <th>Kategorie</th>
+                    <th>Soutěž</th>
+                    <th>Nástroje</th>
+                </tr>
+            </thead>
+            <tbody>
+                {foreach $pitch->getTeams() as $team}
+                    <tr>
+                        <td>{$iterator->counter}.</td>
+                        <td>{$team->name}</td>
+                        <td>{$team->category}</td>
+                        <td>{$team->competition}</td>
+                        <td><a class="i-padding ajax" title="Změnit"><i class="fa fa-pencil a-link"></i></a><a n:href="deleteTeam!" class="i-padding ajax" title="Vymazat"><i class="fa fa-trash a-link"></i></a></td>
+                    </tr>
+                {/foreach}
+            </tbody>
+        </table>
+    </div>
+    <div class="showFormNewTeam">
+        {form teamForm}
+            <div class="col-md-5">
+                <div class="input-group">
+                    <span class="input-group-addon">Vyberte kategorii</span>
+                    {input category class => 'form-control'}
+                </div>
+            </div>
+            <div class="col-md-5">
+                <div class="input-group">
+                    <span class="input-group-addon">Zadejte ligu</span>
+                    {input competition class => 'form-control', placeholder => 'např. Synot liga'}
+                </div>
+            </div>
+            <div class="col-md-2 no-margin">
+                <div class="input-group">
+                    {input save class => 'btn btn-primary width-100 ajax'}
+                </div>
+            </div>
+        {/form}
+    </div>
+</div>
+<div class="clearfix"></div>
+
+<div class="col-md-2 float-right">
+    <a n:href="nextPage!" class="btn btn-primary ajax">Další</a>
+</div>
+<div class="clearfix"></div>
+<hr>

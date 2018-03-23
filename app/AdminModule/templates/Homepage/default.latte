@@ -1,0 +1,32 @@
+{block content}
+<label for="table-result-pitch"><strong>Žádosti o přidání na web</strong></label>
+<table id="table-result-pitch" class="table table-striped">
+    <thead>
+        <tr>
+            <th>Název</th>
+            <th>Popis</th>
+            <th>Správce</th>
+            <th>Zkontrolovat</th>
+            <th>Vytvořeno</th>
+            <th>Přidat hřiště</th>
+        </tr>
+    </thead>
+    <tbody>
+        {foreach $pitch->getNewPitches() as $p}
+            <tr>
+                <td>{$p->get('name')}</td>
+                <td>{$p->get('info')}</td>
+                <td>{$p->get('admin')}</td>
+                <td><a href="{plink :Front:Search:pitchCard pitch_card_id => $p->get('id_pitch')}" class="btn btn-primary">Přejít</a></td>
+                <td>{$p->get('created')|date: 'd.m. Y'}, {$p->get('created')|date: 'H:i'}</td>
+                <td><a n:href="resultPitch! $p->getID(), 'yes'"><i class="fa fa-check-circle"></i></a><a n:href="resultPitch! $p->getID(), 'no'"><i class="fa fa-times-circle"></i></a></td>
+            </tr>
+        {/foreach}
+    </tbody>
+</table>
+
+<div class="card-footer small text-muted">
+    Naposledy aktualizováno {$pitch->getNewestPitch()->get('created')|date: 'd.m. Y'} v {$pitch->getNewestPitch()->get('created')|date: 'H:i'} 
+</div>
+
+

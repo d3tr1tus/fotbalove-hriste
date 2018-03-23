@@ -1,0 +1,53 @@
+<div class="text-center">
+    <h2>Zaregistrujte své hřiště</h2>
+</div>
+{form addPitchForm}
+    <div class="col-md-4">
+        <div class="input-group">
+            <span class="input-group-addon">Název hřiště</span>
+            {input name class => 'form-control', placeholder => 'např. SK Úvaly'}
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="input-group">
+            <span class="input-group-addon">Adresa</span>
+            {input adress class => 'form-control', placeholder => 'např. Arnošta z Pardubic 45'}
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="input-group">
+            <span class="input-group-addon">Správce</span>
+            {input admin class => 'form-control', placeholder => 'např. Jan Novák'}
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="input-group">
+            <span class="input-group-addon">Kontakt na klub</span>
+            {input contact_club class => 'form-control', placeholder => 'např. novak@seznam.cz'}
+        </div>
+    </div>
+    <div class="col-md-8">
+        <div class="input-group">
+            <span class="input-group-addon">Kontaktní osoba</span>
+            {input name_contact class => 'form-control', placeholder => 'např. Marek Veselý'}
+            <span class="input-group-addon">Telefon</span>
+            {input tel class => 'form-control', placeholder => 'např. 333 666 999'}
+        </div>
+    </div>
+    <div class="col-md-12">
+        <div class="input-group">
+            <span class="input-group-addon">Vyberte kraj</span>
+            {input region class => 'form-control'}
+        </div>
+    </div>
+    <div class="col-md-12 flo">
+        <div class="input-group">
+            <span class="input-group-addon">Krátký popis</span>
+            {input info class => 'form-control', placeholder => 'Maximální délka textu je 320 znaků'}
+        </div>
+    </div>
+    <div class="col-md-2 float-right">
+        {input send class => 'btn btn-default ajax'}
+    </div>
+    <div class="clearfix"></div>
+{/form}

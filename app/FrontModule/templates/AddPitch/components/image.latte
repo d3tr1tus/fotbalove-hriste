@@ -1,0 +1,48 @@
+<div class="text-center">
+    <h2>Přidejte obrázky</h2>
+</div>
+<div>
+    <label for="image-instruction">Postup přidávání obrázků:</label>
+    <ol id="image-instruction">
+        <li>Obrázky vybírejte <b>jednotlivě</b></li>
+        <li>První vyberte <b>hlavní obrázek</b> (hlavní obrázek Vás prezentuje při výpisu všech hřišť)</li>
+    </ol>
+</div>
+{form uploadImage}
+    {input image}
+{/form}
+{if $pitch->getAllImages()}
+    <div>
+        <h3>Nahrané obrázky</h3>
+        <table class="table table-bordered">
+            <thead> 
+                <tr>
+                    <th>Náhled</th>
+                    <th>Pořadí</th>
+                    <th>Název</th>
+                    <th>Popis</th>
+                    <th>Nástroje</th>
+                </tr>
+            </thead>
+            <tbody>
+                {foreach $pitch->getAllImages() as $image}
+                    <tr>
+                        <td><div class="col-md-3"><img src="{$basePath}/{$image->url}" style="width: 100%;"></div></td>
+                        <td>{$image->number}</td>
+                        <td>{$image->name}</td>
+                        <td>{*$image*}</td>
+                        <td><a href="#" class="i-padding ajax" style="display: none;" title="Změnit"><i class="fa fa-pencil a-link"></i></a><a n:href="deleteImage! $image->id_image" class="i-padding ajax" title="Vymazat"><i class="fa fa-trash a-link"></i></a></td>
+                    </tr>
+                {/foreach}
+            </tbody>
+        </table>
+    </div>
+{/if}
+<div class="clearfix"></div>
+<div class="col-md-2">
+    <a n:href="toggleChangePage! $page" class="btn btn-default ajax">Zpět</a>
+</div>
+<div class="col-md-2 float-right">  
+    <a n:href="toggleChangePage! 'next'" class="btn btn-default ajax">Další</a>
+</div>
+

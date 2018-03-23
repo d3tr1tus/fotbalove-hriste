@@ -1,0 +1,23 @@
+{block content}
+<table id="table-all-pitch" class="table table-striped">
+    <thead>
+        <tr>
+            <th>Název</th>
+            <th>Popis</th>
+            <th>Kategorie</th>
+            <th>Vytvořeno</th>
+            <th>Nástroje</th>
+        </tr>
+    </thead>
+    <tbody>
+        {foreach $articles->getArticlesAdmin() as $a}
+            <tr>
+                <td>{$a->get('name')}</td>
+                <td>{$a->get('short_content')}</td>
+                <td>{$a->get('category')}</td>
+                <td>{$a->get('created')|date: 'd.m. Y'}, {$a->get('created')|date: 'H:i'}</td>
+                <td><a n:href="editArticle! $a->get('id_article')" title="Upravit příspěvek"><i class="fa fa-pencil"></i></a><a n:href="deleteArticle! $a->get('id_article')" title="Smazat příspěvek"><i class="fa fa-trash"></i></a></td>
+            </tr>
+        {/foreach}
+    </tbody>
+</table>

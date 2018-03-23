@@ -1,0 +1,37 @@
+<div>
+    <label for="coordinates-instruction">Postup přidání souřadnic:</label>
+    <ol id="coordinates-instruction">
+        <li>Přejděte na stránku <strong>https://www.gps-coordinates.net/</strong></li>
+        <li>Do kolonky Adress zadejte adresu Vašeho hřiště a klikněte na tlačítko Get GPS Coordinates</li>
+        <li>Zkopírujte (přepište) kolonku Latitude do kolonky Latitude na Vaší stránce hřiště. To samé posléze udělejte i u Longitude.</li>
+        <li>Nakonec klikněte na tlačítko <strong>Uložit souřadnice</strong></li>
+        <li>Pokud si nejste jistí <a n:href="Homepage:contact">kontaktujte nás</a>.</li>
+    </ol>
+</div>
+<div class="text-center">
+    {form coordinatesForm}
+        <div class="col-md-4">
+            <div class="input-group">
+                <span class="input-group-addon">Latitude</span>
+                {input lat class => 'form-control', placeholder => 'např. 40.741895'}
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="input-group">
+                <span class="input-group-addon">Longitude</span>
+                {input long class => 'form-control', placeholder => 'např. -73.989308'}
+            </div>
+        </div>
+        <div class="col-md-4">
+            {input save class => 'btn btn-primary'}
+        </div>
+    {/form}
+</div>
+<div class="clearfix"></div>
+
+<div class="col-md-2">
+    <a n:href="toggleChangePage!" class="btn btn-default ajax">Zpět</a>
+</div>
+<div class="col-md-2 float-right">  
+    <a n:href="toggleChangePage! 'next'" class="btn btn-default ajax">Další</a>
+</div>

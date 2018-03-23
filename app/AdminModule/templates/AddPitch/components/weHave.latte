@@ -1,0 +1,37 @@
+<div class="text-center">
+    <h2>Zázemí</h2>
+</div>
+<div class="col-md-12">
+    <table class="table we-have">
+        <tbody>
+            <tr>
+                <th></th>
+                <th class="text-center">ANO</th>
+                <th class="text-center">NE</th>
+            </tr>
+            {foreach Constants::$we_have as $key => $value}
+                <tr>
+                    <td>{$value}</td>
+                    <td>
+                        <div class="checkbox checkbox-success text-center">
+                            <input id="checkboxYes{$key}" type="checkbox" class="checkboxWeHave" type="checkbox" data-link="{plink checkboxWeHave! $key, 'yes'}" {if $pitch->existWeHaveItem($key)}checked="checked"{/if}>
+                            <label for="checkboxYes{$key}"></label>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="checkbox checkbox-danger text-center">
+                            <input id="checkboxNo{$key}" type="checkbox" class="checkboxWeHave" type="checkbox" data-link="{plink checkboxWeHave! $key, 'no'}" {if !$pitch->existWeHaveItem($key)}checked="checked"{/if}>
+                            <label for="checkboxNo{$key}"></label>
+                        </div>
+                    </td>
+                </tr>
+            {/foreach}
+        </tbody>
+    </table>
+
+</div>
+<div class="col-md-2 float-right">
+    <a n:href="nextPage!" class="btn btn-primary ajax">Další</a>
+</div>
+<div class="clearfix"></div>
+<hr>

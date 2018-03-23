@@ -1,0 +1,34 @@
+{block content}
+<div class="container content-background main-class">
+    <h2 class="text-center">Kontakt</h2>
+    <hr>
+    <div class="width-40 div-center">
+        {form contactUs}
+            <div class="col-md-12 margin-bottom">
+                <div class="input-group">
+                    {input name class => 'form-control', placeholder => 'Jméno'}
+                </div>
+            </div>
+            <div class="col-md-12 margin-top-1">
+                <div class="input-group">
+                    {input surname class => 'form-control', placeholder => 'Příjmení'}
+                </div>
+            </div>
+            <div class="col-md-12 margin-top-1">
+                <div class="input-group">
+                    {input email class => 'form-control', placeholder => 'Email'}
+                </div>
+            </div>
+            <div class="col-md-12 margin-top-1">
+                <div class="input-group">
+                    {input content class => 'form-control', placeholder => 'Obsah zprávy', style => 'min-height: 200px; min-width: 70%;'}
+                </div>
+            </div>
+            <div class="col-md-12 margin-top-1">
+                <div class="input-group">
+                    {input send class => 'btn btn-primary'}
+                </div>
+            </div>
+        {/form}
+    </div>
+</div>
